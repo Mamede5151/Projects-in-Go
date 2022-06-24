@@ -1,12 +1,17 @@
 package main
-import (
-    "fmt"
-    "net/http"
-func main(){
-    http.HandleFunc("/ping",ping)
-    http.ListenAndServe("8080",nil)
-}
 
-func ping(w http.ResponseWriter, req *http.Request) {
-    fmt.Fprintf(w, "pong\n")
+import (
+	"Linha-de-Comando/app"
+	"fmt"
+	"log"
+	"os"
+)
+
+func main() {
+	fmt.Println("POnto de Partida")
+
+	aplicacao := app.Gerar()
+	if erro := aplicacao.Run(os.Args); erro != nil {
+		log.Fatal(erro)
+	}
 }
